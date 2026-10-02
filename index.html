@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Happy Boyfriend Day 💌</title>
+<link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600;700&family=Poppins:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{height:100%;margin:0;overflow:hidden}
+body{background:radial-gradient(circle at 30% 20%,#ff8fb1,#c2185b 55%,#4a0e3a);font-family:Poppins,system-ui,sans-serif;color:#fff}
+canvas{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:1}
+#stage{position:fixed;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:2;gap:28px}
+h1{font-family:'Dancing Script',cursive;font-size:clamp(30px,8vw,48px);margin:0;text-align:center;text-shadow:0 3px 14px rgba(0,0,0,.3)}
+.hint{font-size:15px;opacity:.9;animation:pulse 1.4s infinite}
+@keyframes pulse{50%{transform:scale(1.08);opacity:.6}}
+.env{position:relative;width:min(80vw,300px);aspect-ratio:3/2;cursor:pointer;animation:float 3s ease-in-out infinite;perspective:800px}
+@keyframes float{50%{transform:translateY(-12px) rotate(-1.5deg)}}
+.env .back{position:absolute;inset:0;background:#f8c8d8;border-radius:10px;box-shadow:0 18px 40px rgba(0,0,0,.35)}
+.env .paper{position:absolute;left:8%;right:8%;top:6%;bottom:8%;background:#fff;border-radius:6px;transition:transform .9s .5s;display:flex;align-items:center;justify-content:center;font-size:34px}
+.env .front{position:absolute;inset:0;border-radius:10px;background:linear-gradient(135deg,#ffb3cc 50%,transparent 50%) left/51% 100% no-repeat,linear-gradient(225deg,#ffa3c1 50%,transparent 50%) right/51% 100% no-repeat,linear-gradient(0deg,#ff9ebc 45%,transparent 45%)}
+.env .flap{position:absolute;left:0;right:0;top:0;height:58%;background:#ff86ad;clip-path:polygon(0 0,100% 0,50% 100%);transform-origin:top;transition:transform .7s,z-index 0s .35s;z-index:3;border-radius:10px 10px 0 0}
+.env .seal{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);font-size:40px;z-index:4;transition:opacity .3s;filter:drop-shadow(0 3px 4px rgba(0,0,0,.3))}
+.env.open{animation:none}
+.env.open .flap{transform:rotateX(180deg);z-index:1}
+.env.open .seal{opacity:0}
+.env.open .paper{transform:translateY(-70%)}
+#card{position:fixed;inset:0;z-index:5;display:none;overflow-y:auto;padding:28px 18px 40px;text-align:center}
+#card.show{display:block}
+.inner{max-width:480px;margin:0 auto;animation:pop .9s cubic-bezier(.2,1.4,.4,1)}
+@keyframes pop{from{transform:scale(.3) translateY(80px);opacity:0}}
+.title{font-family:'Dancing Script',cursive;font-size:clamp(38px,11vw,60px);line-height:1.1;margin:6px 0 4px;background:linear-gradient(90deg,#fff,#ffd6e5,#fff);background-size:200%;-webkit-background-clip:text;background-clip:text;color:transparent;animation:shine 3s linear infinite}
+@keyframes shine{to{background-position:200% 0}}
+.photos{display:flex;justify-content:center;gap:14px;margin:22px 0;position:relative}
+.pol{width:66%;transform:rotate(-3deg);animation:sway 4s ease-in-out infinite;background:#fff;padding:8px 8px 26px;border-radius:4px;box-shadow:0 10px 24px rgba(0,0,0,.4);cursor:pointer;color:#c2185b;font-size:12px;position:relative}
+@keyframes sway{50%{transform:rotate(3deg) translateY(-6px)}}
+.pol .ph{aspect-ratio:4/5;background:#ffe3ed;display:flex;align-items:center;justify-content:center;text-align:center;overflow:hidden;font-weight:500}
+.pol img{width:100%;height:100%;object-fit:cover;object-position:center 30%}
+.pol b{position:absolute;bottom:4px;left:0;right:0;font-family:'Dancing Script',cursive;font-size:18px}
+.heartmid{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);font-size:40px;z-index:2;animation:beat 1s infinite}
+@keyframes beat{50%{transform:translate(-50%,-50%) scale(1.3)}}
+.wish{background:rgba(255,255,255,.16);backdrop-filter:blur(6px);border:1px solid rgba(255,255,255,.35);border-radius:18px;padding:18px;line-height:1.7;font-size:15.5px}
+.wish p{margin:8px 0;opacity:0;transform:translateY(14px);animation:up .8s forwards}
+@keyframes up{to{opacity:1;transform:none}}
+.sign{font-family:'Dancing Script',cursive;font-size:26px;margin-top:10px}
+button{margin:18px 6px 0;border:0;border-radius:30px;padding:11px 22px;font:500 14px Poppins,sans-serif;background:#fff;color:#c2185b;cursor:pointer;box-shadow:0 6px 16px rgba(0,0,0,.3)}
+</style></head><body>
+<canvas id="c"></canvas>
+<div id="stage">
+  <h1>A little surprise for you 💕</h1>
+  <div class="env" id="env"><div class="back"></div><div class="paper">💖</div><div class="front"></div><div class="flap"></div><div class="seal">❤️</div></div>
+  <div class="hint">Tap the envelope to open ✨</div>
+</div>
+<div id="card"><div class="inner">
+  <div style="font-size:34px">🎉💙🎉</div>
+  <div class="title">Happy Boyfriend Day!</div>
+  <div style="opacity:.9">to my favourite person ever</div>
+  <div class="photos">
+    <label class="pol"><div class="ph" id="p1"><img src="photo.jpg" alt="Us"></div><b>Us 💕</b><input type="file" accept="image/*" hidden data-t="p1"></label>
+  </div>
+  <div class="wish" id="wish">
+    <p style="animation-delay:.6s">Thank you for being my safe place, my best friend and my biggest smile. 🥰</p>
+    <p style="animation-delay:1.6s">Every day with you feels like a beautiful dream I never want to wake up from. ✨</p>
+    <p style="animation-delay:2.6s">May your day be full of love, laughter, chocolates and all the things that make you happy. 🍫🎁</p>
+    <p style="animation-delay:3.6s">I love you more than words can say. 💞</p>
+    <div class="sign" style="opacity:0;animation:up .8s 4.6s forwards">Forever yours ❤️</div>
+  </div>
+  <button id="boom">🎆 Surprise me</button><button id="again">💌 Replay</button>
+</div></div>
+<script>
+const cv=document.getElementById('c'),x=cv.getContext('2d');let W,H;
+function rs(){W=cv.width=innerWidth;H=cv.height=innerHeight}rs();addEventListener('resize',rs);
+const cols=['#fff','#ffd6e5','#ff5c8a','#ffe066','#9be7ff','#d1a3ff'];
+let P=[];
+function heart(px,py,s,c,a,r){x.save();x.translate(px,py);x.rotate(r||0);x.globalAlpha=a;x.fillStyle=c;x.beginPath();
+x.moveTo(0,s/4);x.bezierCurveTo(0,-s/4,-s/2,-s/4,-s/2,s/8);x.bezierCurveTo(-s/2,s/2,0,s*.7,0,s);
+x.bezierCurveTo(0,s*.7,s/2,s/2,s/2,s/8);x.bezierCurveTo(s/2,-s/4,0,-s/4,0,s/4);x.fill();x.restore()}
+function star(px,py,s,c,a){x.save();x.globalAlpha=a;x.fillStyle=c;x.translate(px,py);x.beginPath();
+for(let i=0;i<8;i++){const r=i%2?s/3:s;x.lineTo(Math.cos(i*Math.PI/4)*r,Math.sin(i*Math.PI/4)*r)}x.fill();x.restore()}
+function ambient(){P.push({t:Math.random()<.75?'h':'s',x:Math.random()*W,y:H+20,vx:(Math.random()-.5)*.6,vy:-(.6+Math.random()*1.4),s:8+Math.random()*22,c:cols[Math.random()*cols.length|0],a:.8,r:Math.random(),g:0,life:1,ph:Math.random()*6})}
+function burst(bx,by,n){for(let i=0;i<n;i++){const an=Math.random()*6.28,sp=2+Math.random()*7;
+P.push({t:['h','s','c'][Math.random()*3|0],x:bx,y:by,vx:Math.cos(an)*sp,vy:Math.sin(an)*sp-2,s:6+Math.random()*14,c:cols[Math.random()*cols.length|0],a:1,r:Math.random()*6,g:.12,life:1,fade:.008+Math.random()*.01,ph:0})}}
+let f=0;
+function loop(){x.clearRect(0,0,W,H);f++;if(f%12==0)ambient();
+P=P.filter(p=>p.life>0&&p.y>-40&&p.y<H+60);
+for(const p of P){p.vy+=p.g;p.x+=p.vx+Math.sin(f/30+p.ph)*(p.g?0:.4);p.y+=p.vy;p.r+=.03;
+if(p.fade){p.life-=p.fade;p.a=Math.max(p.life,0)}
+if(p.t=='h')heart(p.x,p.y,p.s,p.c,p.a,Math.sin(p.r)*.5);
+else if(p.t=='s')star(p.x,p.y,p.s/2,p.c,p.a*(.6+.4*Math.sin(f/8+p.ph)));
+else{x.save();x.globalAlpha=p.a;x.fillStyle=p.c;x.translate(p.x,p.y);x.rotate(p.r);x.fillRect(-p.s/4,-p.s/2,p.s/2,p.s);x.restore()}}
+requestAnimationFrame(loop)}loop();
+function fireworks(){let k=0;const iv=setInterval(()=>{burst(W*(.15+Math.random()*.7),H*(.15+Math.random()*.4),45);if(++k>6)clearInterval(iv)},350)}
+const env=document.getElementById('env'),card=document.getElementById('card'),stage=document.getElementById('stage');
+env.onclick=()=>{if(env.classList.contains('open'))return;env.classList.add('open');burst(W/2,H/2,60);
+setTimeout(()=>{stage.style.display='none';card.classList.add('show');fireworks()},1900)};
+document.getElementById('boom').onclick=fireworks;
+document.getElementById('again').onclick=()=>{card.classList.remove('show');stage.style.display='flex';env.classList.remove('open');
+document.querySelectorAll('.wish p,.sign').forEach(e=>{e.style.animation='none';e.offsetWidth;e.style.animation=''})};
+document.querySelectorAll('input[type=file]').forEach(i=>i.onchange=e=>{const fl=e.target.files[0];if(!fl)return;
+const r=new FileReader();r.onload=()=>{document.getElementById(i.dataset.t).innerHTML='<img src="'+r.result+'">';burst(W/2,H/3,40)};r.readAsDataURL(fl)});
+card.addEventListener('click',e=>{if(e.target.tagName!=='BUTTON'&&!e.target.closest('label'))burst(e.clientX,e.clientY,22)});
+</script></body></html>
