@@ -4,98 +4,130 @@
 <title>Happy Boyfriend Day 💌</title>
 <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600;700&family=Poppins:wght@400;500&display=swap" rel="stylesheet">
 <style>
-:root{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
-html,body{height:100%;margin:0;overflow:hidden}
-body{background:radial-gradient(circle at 30% 20%,#ff8fb1,#c2185b 55%,#4a0e3a);font-family:Poppins,system-ui,sans-serif;color:#fff}
-canvas{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:1}
-#stage{position:fixed;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:2;gap:28px}
-h1{font-family:'Dancing Script',cursive;font-size:clamp(30px,8vw,48px);margin:0;text-align:center;text-shadow:0 3px 14px rgba(0,0,0,.3)}
-.hint{font-size:15px;opacity:.9;animation:pulse 1.4s infinite}
+html,body{margin:0;height:100%}
+body{background:#fff3f6;color:#4a1d2e;font-family:Poppins,system-ui,sans-serif;overflow-x:hidden}
+canvas{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:60}
+.script{font-family:'Dancing Script',cursive}
+#intro{position:fixed;inset:0;z-index:50;background:radial-gradient(circle at 30% 20%,#ff8fb1,#c2185b 55%,#4a0e3a);color:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:28px;transition:opacity .9s;padding-top:env(safe-area-inset-top)}
+#intro h1{font-family:'Dancing Script',cursive;font-size:clamp(30px,8vw,46px);margin:0;text-align:center}
+.hint{font-size:15px;animation:pulse 1.4s infinite}
 @keyframes pulse{50%{transform:scale(1.08);opacity:.6}}
 .env{position:relative;width:min(80vw,300px);aspect-ratio:3/2;cursor:pointer;animation:float 3s ease-in-out infinite;perspective:800px}
 @keyframes float{50%{transform:translateY(-12px) rotate(-1.5deg)}}
 .env .back{position:absolute;inset:0;background:#f8c8d8;border-radius:10px;box-shadow:0 18px 40px rgba(0,0,0,.35)}
 .env .paper{position:absolute;left:8%;right:8%;top:6%;bottom:8%;background:#fff;border-radius:6px;transition:transform .9s .5s;display:flex;align-items:center;justify-content:center;font-size:34px}
 .env .front{position:absolute;inset:0;border-radius:10px;background:linear-gradient(135deg,#ffb3cc 50%,transparent 50%) left/51% 100% no-repeat,linear-gradient(225deg,#ffa3c1 50%,transparent 50%) right/51% 100% no-repeat,linear-gradient(0deg,#ff9ebc 45%,transparent 45%)}
-.env .flap{position:absolute;left:0;right:0;top:0;height:58%;background:#ff86ad;clip-path:polygon(0 0,100% 0,50% 100%);transform-origin:top;transition:transform .7s,z-index 0s .35s;z-index:3;border-radius:10px 10px 0 0}
-.env .seal{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);font-size:40px;z-index:4;transition:opacity .3s;filter:drop-shadow(0 3px 4px rgba(0,0,0,.3))}
-.env.open{animation:none}
-.env.open .flap{transform:rotateX(180deg);z-index:1}
-.env.open .seal{opacity:0}
-.env.open .paper{transform:translateY(-70%)}
-#card{position:fixed;inset:0;z-index:5;display:none;overflow-y:auto;padding:28px 18px 40px;text-align:center}
-#card.show{display:block}
-.inner{max-width:480px;margin:0 auto;animation:pop .9s cubic-bezier(.2,1.4,.4,1)}
-@keyframes pop{from{transform:scale(.3) translateY(80px);opacity:0}}
-.title{font-family:'Dancing Script',cursive;font-size:clamp(38px,11vw,60px);line-height:1.1;margin:6px 0 4px;background:linear-gradient(90deg,#fff,#ffd6e5,#fff);background-size:200%;-webkit-background-clip:text;background-clip:text;color:transparent;animation:shine 3s linear infinite}
-@keyframes shine{to{background-position:200% 0}}
-.photos{display:flex;justify-content:center;gap:14px;margin:22px 0;position:relative}
-.pol{width:66%;transform:rotate(-3deg);animation:sway 4s ease-in-out infinite;background:#fff;padding:8px 8px 26px;border-radius:4px;box-shadow:0 10px 24px rgba(0,0,0,.4);cursor:pointer;color:#c2185b;font-size:12px;position:relative}
+.env .flap{position:absolute;left:0;right:0;top:0;height:58%;background:#ff86ad;clip-path:polygon(0 0,100% 0,50% 100%);transform-origin:top;transition:transform .7s,z-index 0s .35s;z-index:3}
+.env .seal{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);font-size:40px;z-index:4;transition:opacity .3s}
+.env.open{animation:none}.env.open .flap{transform:rotateX(180deg);z-index:1}.env.open .seal{opacity:0}.env.open .paper{transform:translateY(-70%)}
+main{max-width:520px;margin:0 auto;padding:0 18px 60px}
+.hero{min-height:70vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center}
+.hero h1{font-family:'Dancing Script',cursive;font-size:clamp(40px,12vw,64px);margin:8px 0;color:#d6204f}
+section{margin:46px 0;text-align:center;opacity:0;transform:translateY(40px);transition:all .9s}
+section.in{opacity:1;transform:none}
+h2{font-family:'Dancing Script',cursive;font-size:34px;color:#d6204f;margin:0 0 14px}
+.card{background:#fff;border-radius:16px;padding:20px;box-shadow:0 8px 28px rgba(214,32,79,.15);line-height:1.7;font-size:15px;text-align:left}
+.pol{width:74%;margin:0 auto;background:#fff;padding:10px 10px 34px;box-shadow:0 12px 28px rgba(0,0,0,.25);transform:rotate(-3deg);animation:sway 4s ease-in-out infinite;position:relative}
 @keyframes sway{50%{transform:rotate(3deg) translateY(-6px)}}
-.pol .ph{aspect-ratio:4/5;background:#ffe3ed;display:flex;align-items:center;justify-content:center;text-align:center;overflow:hidden;font-weight:500}
-.pol img{width:100%;height:100%;object-fit:cover;object-position:center 30%}
-.pol b{position:absolute;bottom:4px;left:0;right:0;font-family:'Dancing Script',cursive;font-size:18px}
-.heartmid{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);font-size:40px;z-index:2;animation:beat 1s infinite}
-@keyframes beat{50%{transform:translate(-50%,-50%) scale(1.3)}}
-.wish{background:rgba(255,255,255,.16);backdrop-filter:blur(6px);border:1px solid rgba(255,255,255,.35);border-radius:18px;padding:18px;line-height:1.7;font-size:15.5px}
-.wish p{margin:8px 0;opacity:0;transform:translateY(14px);animation:up .8s forwards}
-@keyframes up{to{opacity:1;transform:none}}
-.sign{font-family:'Dancing Script',cursive;font-size:26px;margin-top:10px}
-button{margin:18px 6px 0;border:0;border-radius:30px;padding:11px 22px;font:500 14px Poppins,sans-serif;background:#fff;color:#c2185b;cursor:pointer;box-shadow:0 6px 16px rgba(0,0,0,.3)}
+.pol img{width:100%;aspect-ratio:4/5;object-fit:cover;object-position:center 30%;display:block}
+.pol b{position:absolute;bottom:4px;left:0;right:0;font-family:'Dancing Script',cursive;font-size:22px;color:#d6204f}
+.tl{margin-top:22px;display:grid;gap:12px}.tl .card{font-size:14px;padding:14px}.tl small{color:#d6204f;font-weight:500}
+.btn{border:0;border-radius:30px;padding:12px 24px;font:500 15px Poppins,sans-serif;background:#e8184d;color:#fff;cursor:pointer;box-shadow:0 6px 16px rgba(232,24,77,.4);transition:transform .2s}
+.btn:active{transform:scale(.93)}.btn.alt{background:#fde1e8;color:#d6204f;box-shadow:none}
+#reason{min-height:70px;margin:16px 0;font-size:18px;font-family:'Dancing Script',cursive;font-size:26px}
+.open-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.open-grid div{border:2px dashed #e8184d;border-radius:12px;background:#fff;padding:18px 8px;cursor:pointer;font-weight:500;color:#d6204f;transition:transform .2s}
+.open-grid div:active{transform:scale(.94)}
+#modal{position:fixed;inset:0;background:rgba(74,29,46,.55);z-index:40;display:none;align-items:center;justify-content:center;padding:24px}
+#modal.show{display:flex}#modal .card{max-width:340px;text-align:center;animation:pop .5s cubic-bezier(.2,1.4,.4,1)}
+@keyframes pop{from{transform:scale(.3);opacity:0}}
+.dark{background:#7a0c2b;color:#fff;border-radius:22px;padding:26px 14px}.dark h2{color:#fff}
+.cd{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}.cd div{background:rgba(255,255,255,.12);border-radius:12px;padding:12px 2px}.cd b{display:block;font-size:26px}.cd span{font-size:11px;opacity:.8}
+.bear{font-size:110px;line-height:1.1;transition:transform .3s}
+.bear.shake{animation:shake .4s}@keyframes shake{25%{transform:rotate(-12deg)}75%{transform:rotate(12deg)}}
+#msg{font-family:'Dancing Script',cursive;font-size:28px;color:#d6204f;min-height:40px}
+.gift{font-size:90px;cursor:pointer;display:inline-block;animation:float 2.5s infinite}
+footer{text-align:center;font-family:'Dancing Script',cursive;font-size:24px;color:#d6204f}
 </style></head><body>
 <canvas id="c"></canvas>
-<div id="stage">
+
+<div id="intro">
   <h1>A little surprise for you 💕</h1>
   <div class="env" id="env"><div class="back"></div><div class="paper">💖</div><div class="front"></div><div class="flap"></div><div class="seal">❤️</div></div>
   <div class="hint">Tap the envelope to open ✨</div>
 </div>
-<div id="card"><div class="inner">
-  <div style="font-size:34px">🎉💙🎉</div>
-  <div class="title">Happy Boyfriend Day!</div>
-  <div style="opacity:.9">to my favourite person ever</div>
-  <div class="photos">
-    <label class="pol"><div class="ph" id="p1"><img src="photo.jpg" alt="Us"></div><b>Us 💕</b><input type="file" accept="image/*" hidden data-t="p1"></label>
-  </div>
-  <div class="wish" id="wish">
-    <p style="animation-delay:.6s">Thank you for being my safe place, my best friend and my biggest smile. 🥰</p>
-    <p style="animation-delay:1.6s">Every day with you feels like a beautiful dream I never want to wake up from. ✨</p>
-    <p style="animation-delay:2.6s">May your day be full of love, laughter, chocolates and all the things that make you happy. 🍫🎁</p>
-    <p style="animation-delay:3.6s">I love you more than words can say. 💞</p>
-    <div class="sign" style="opacity:0;animation:up .8s 4.6s forwards">Forever yours ❤️</div>
-  </div>
-  <button id="again">💌 Replay</button>
-</div></div>
+
+<div id="modal"><div class="card"><div id="mt"></div><button class="btn" style="margin-top:14px" id="mc">Close 💗</button></div></div>
+
+<main>
+  <div class="hero"><div style="font-size:44px">🎉💙🎉</div><h1>Happy Boyfriend Day!</h1><div>to my favourite person ever</div><div style="margin-top:26px;font-size:13px;opacity:.7">scroll down ↓</div></div>
+
+  <section><h2>A Letter From My Heart ❤</h2><div class="card" id="letter" style="min-height:190px"></div></section>
+
+  <section><h2>Our Special Moment 📸</h2>
+    <div class="pol"><img src="photo.jpg" alt="Us"><b>Us 💕</b></div>
+    <div class="tl" style="margin-top:34px">
+      <div class="card"><small>📅 Date 1</small><br><b>Our First Meeting</b>
+        <br>☕💕 Our first meet was an unofficial coffee date: yor cappuccino ☕, my mocha frappe 🥤, a little shyness 🙈, and endless gossip and laughs 😂. When I reached home, your message said, "Evening well spent with you" 🥰💌. My heart did a happy dance 💃💓, and I knew this story would be beautiful 🌸❤️</div>
+      <div class="card"><small>📅 Date 2</small><br><b>Our First Kiss Together</b><br>🎁💋 you told me you wanted a gift for your friend, so I happily ordered it for her 😇. The day after my birthday, you handed it to me and said, "It was always for you" 🥹💝. I was still smiling in surprise when you suddenly kissed me 😳💓. It was so unexpected and so beautiful 🥰✨. Time stopped for a moment ⏳, and my heart has been smiling ever since 💞🌸</div>
+       </div></section>
+
+  <section><h2>Why I Love You 💗</h2><div id="reason">Tap the button 👇</div><button class="btn" id="why">Click to Feel Loved</button></section>
+
+  <section><h2>Open When... 💌</h2><div class="open-grid" id="og"></div></section>
+  
+  <section><h2>Will You Be Mine? 🌹</h2>
+    <div class="bear" id="bear">🧸</div><div id="msg">I love you 💕</div>
+    <div style="display:flex;gap:12px;justify-content:center;align-items:center;margin-top:8px"><button class="btn alt" id="no">No 🙈</button><button class="btn" id="yes">Yes ❤️</button></div></section>
+
+  <section><h2>Our Last Surprise 🎁</h2><div id="gbox"><div class="gift" id="gift">🎁</div><div style="font-size:13px;opacity:.7">tap to open</div></div></section>
+  <footer>Forever yours ❤️</footer>
+</main>
+
 <script>
-const cv=document.getElementById('c'),x=cv.getContext('2d');let W,H;
+/* ===== EDIT THESE ===== */
+const START_DATE=new Date('2024-02-14T00:00:00'); // the day your love story began
+const LETTER="My Love, I don't always know how to put my feelings into words, but I hope you know how much you mean to me. Meeting you has given me so many moments that I wish I could pause and keep forever. I love the little things about you: your smile, your voice, the way you talk, the way you make me laugh. Thank you for being my safe place and my biggest smile. Happy Boyfriend Day! 💞";
+const REASONS=["Your smile fixes my worst days 😊","You listen like no one else 🥰","You make ordinary moments magical ✨","You're my best friend and my home 🏡","Because you're simply you 💗"];
+const OPEN={"Miss Me 🥺":"Close your eyes and take a deep breath. I'm right there with you, always. 💞","You're Sad 🌧️":"This too shall pass. I'm proud of you, and I'm always one call away. 🤗","You're Happy 🌈":"Yay! I'm so happy you're happy! Keep smiling, it looks beautiful on you. 😊","Can't Sleep 🌙":"Think of me, think of us, and let the dreams take over. Good night, my love. 😴"};
+/* ====================== */
+const cv=document.getElementById('c'),x=cv.getContext('2d');let W,H,P=[],f=0;
 function rs(){W=cv.width=innerWidth;H=cv.height=innerHeight}rs();addEventListener('resize',rs);
-const cols=['#fff','#ffd6e5','#ff5c8a','#ffe066','#9be7ff','#d1a3ff'];
-let P=[];
-function heart(px,py,s,c,a,r){x.save();x.translate(px,py);x.rotate(r||0);x.globalAlpha=a;x.fillStyle=c;x.beginPath();
-x.moveTo(0,s/4);x.bezierCurveTo(0,-s/4,-s/2,-s/4,-s/2,s/8);x.bezierCurveTo(-s/2,s/2,0,s*.7,0,s);
-x.bezierCurveTo(0,s*.7,s/2,s/2,s/2,s/8);x.bezierCurveTo(s/2,-s/4,0,-s/4,0,s/4);x.fill();x.restore()}
-function star(px,py,s,c,a){x.save();x.globalAlpha=a;x.fillStyle=c;x.translate(px,py);x.beginPath();
-for(let i=0;i<8;i++){const r=i%2?s/3:s;x.lineTo(Math.cos(i*Math.PI/4)*r,Math.sin(i*Math.PI/4)*r)}x.fill();x.restore()}
-function ambient(){P.push({t:Math.random()<.75?'h':'s',x:Math.random()*W,y:H+20,vx:(Math.random()-.5)*.6,vy:-(.6+Math.random()*1.4),s:8+Math.random()*22,c:cols[Math.random()*cols.length|0],a:.8,r:Math.random(),g:0,life:1,ph:Math.random()*6})}
-function burst(bx,by,n){for(let i=0;i<n;i++){const an=Math.random()*6.28,sp=2+Math.random()*7;
-P.push({t:['h','s','c'][Math.random()*3|0],x:bx,y:by,vx:Math.cos(an)*sp,vy:Math.sin(an)*sp-2,s:6+Math.random()*14,c:cols[Math.random()*cols.length|0],a:1,r:Math.random()*6,g:.12,life:1,fade:.008+Math.random()*.01,ph:0})}}
-let f=0;
-function loop(){x.clearRect(0,0,W,H);f++;if(f%12==0)ambient();
-P=P.filter(p=>p.life>0&&p.y>-40&&p.y<H+60);
-for(const p of P){p.vy+=p.g;p.x+=p.vx+Math.sin(f/30+p.ph)*(p.g?0:.4);p.y+=p.vy;p.r+=.03;
-if(p.fade){p.life-=p.fade;p.a=Math.max(p.life,0)}
-if(p.t=='h')heart(p.x,p.y,p.s,p.c,p.a,Math.sin(p.r)*.5);
-else if(p.t=='s')star(p.x,p.y,p.s/2,p.c,p.a*(.6+.4*Math.sin(f/8+p.ph)));
-else{x.save();x.globalAlpha=p.a;x.fillStyle=p.c;x.translate(p.x,p.y);x.rotate(p.r);x.fillRect(-p.s/4,-p.s/2,p.s/2,p.s);x.restore()}}
-requestAnimationFrame(loop)}loop();
+const cols=['#ff5c8a','#e8184d','#ffd6e5','#ffe066','#ffffff','#d1a3ff'];
+function heart(px,py,s,c,a,r){x.save();x.translate(px,py);x.rotate(r);x.globalAlpha=a;x.fillStyle=c;x.beginPath();x.moveTo(0,s/4);x.bezierCurveTo(0,-s/4,-s/2,-s/4,-s/2,s/8);x.bezierCurveTo(-s/2,s/2,0,s*.7,0,s);x.bezierCurveTo(0,s*.7,s/2,s/2,s/2,s/8);x.bezierCurveTo(s/2,-s/4,0,-s/4,0,s/4);x.fill();x.restore()}
+function amb(){P.push({t:'h',x:Math.random()*W,y:H+20,vx:(Math.random()-.5)*.5,vy:-(.5+Math.random()*1.1),s:8+Math.random()*16,c:cols[Math.random()*3|0],a:.35,r:0,g:0,life:1,ph:Math.random()*6})}
+function burst(bx,by,n){for(let i=0;i<n;i++){const a=Math.random()*6.28,sp=2+Math.random()*7;P.push({t:Math.random()<.5?'h':'c',x:bx,y:by,vx:Math.cos(a)*sp,vy:Math.sin(a)*sp-2,s:6+Math.random()*12,c:cols[Math.random()*cols.length|0],a:1,r:Math.random()*6,g:.12,life:1,fade:.009+Math.random()*.01,ph:0})}}
+(function loop(){x.clearRect(0,0,W,H);f++;if(f%14==0)amb();P=P.filter(p=>p.life>0&&p.y>-40&&p.y<H+60);
+for(const p of P){p.vy+=p.g;p.x+=p.vx+(p.g?0:Math.sin(f/30+p.ph)*.4);p.y+=p.vy;p.r+=.03;if(p.fade){p.life-=p.fade;p.a=Math.max(p.life,0)}
+if(p.t=='h')heart(p.x,p.y,p.s,p.c,p.a,Math.sin(p.r)*.5);else{x.save();x.globalAlpha=p.a;x.fillStyle=p.c;x.translate(p.x,p.y);x.rotate(p.r);x.fillRect(-p.s/4,-p.s/2,p.s/2,p.s);x.restore()}}
+requestAnimationFrame(loop)})();
 function fireworks(){let k=0;const iv=setInterval(()=>{burst(W*(.15+Math.random()*.7),H*(.15+Math.random()*.4),45);if(++k>6)clearInterval(iv)},350)}
-const env=document.getElementById('env'),card=document.getElementById('card'),stage=document.getElementById('stage');
-env.onclick=()=>{if(env.classList.contains('open'))return;env.classList.add('open');burst(W/2,H/2,60);
-setTimeout(()=>{stage.style.display='none';card.classList.add('show');fireworks()},1900)};
-document.getElementById('boom').onclick=fireworks;
-document.getElementById('again').onclick=()=>{card.classList.remove('show');stage.style.display='flex';env.classList.remove('open');
-document.querySelectorAll('.wish p,.sign').forEach(e=>{e.style.animation='none';e.offsetWidth;e.style.animation=''})};
-document.querySelectorAll('input[type=file]').forEach(i=>i.onchange=e=>{const fl=e.target.files[0];if(!fl)return;
-const r=new FileReader();r.onload=()=>{document.getElementById(i.dataset.t).innerHTML='<img src="'+r.result+'">';burst(W/2,H/3,40)};r.readAsDataURL(fl)});
-card.addEventListener('click',e=>{if(e.target.tagName!=='BUTTON'&&!e.target.closest('label'))burst(e.clientX,e.clientY,22)});
+const $=id=>document.getElementById(id);
+/* intro */
+document.body.style.overflow='hidden';
+$('env').onclick=function(){if(this.classList.contains('open'))return;this.classList.add('open');burst(W/2,H/2,60);
+setTimeout(()=>{$('intro').style.opacity=0;document.body.style.overflow='';fireworks();setTimeout(()=>$('intro').remove(),900)},1900)};
+/* reveal + typewriter */
+let typed=false;
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');
+if(e.target.contains($('letter'))&&!typed){typed=true;let i=0;const t=setInterval(()=>{$('letter').textContent=LETTER.slice(0,++i);if(i>=LETTER.length)clearInterval(t)},28)}}}),{threshold:.25});
+document.querySelectorAll('section').forEach(s=>io.observe(s));
+/* reasons */
+let ri=0;$('why').onclick=e=>{$('reason').textContent=REASONS[ri++%REASONS.length];burst(e.clientX,e.clientY,26)};
+/* open when */
+Object.entries(OPEN).forEach(([k,v])=>{const d=document.createElement('div');d.textContent=k;d.onclick=()=>{$('mt').innerHTML='<div class="script" style="font-size:28px;color:#d6204f">Open when... '+k+'</div><p>'+v+'</p>';$('modal').classList.add('show')};$('og').appendChild(d)});
+$('mc').onclick=()=>$('modal').classList.remove('show');
+/* counter */
+setInterval(()=>{let t=Math.max(0,Date.now()-START_DATE)/1000|0;$('d').textContent=t/86400|0;$('h').textContent=t%86400/3600|0;$('m').textContent=t%3600/60|0;$('s').textContent=t%60},1000);
+/* will you be mine */
+const NO=["Really? 🥺","Again?! 😤","Please? 💔","Last chance... 😭"];let n=0,bear=$('bear');
+$('no').onclick=()=>{bear.textContent='🐻';bear.classList.remove('shake');void bear.offsetWidth;bear.classList.add('shake');
+$('msg').textContent='Really? Again?! You\'re breaking my heart 💔';$('no').textContent=NO[n%NO.length];n++;
+$('yes').style.transform='scale('+Math.min(1+n*.18,2)+')';$('yes').style.margin=(n*6)+'px'};
+$('yes').onclick=e=>{bear.textContent='🧸🎀';$('msg').textContent='Yayyyy! I knew you\'d say yes! 💖';$('no').style.display='none';burst(e.clientX,e.clientY,70);fireworks()};
+/* gift */
+$('gift').onclick=()=>{$('gift').style.animation='none';$('gift').textContent='💌';burst(W/2,H/2,90);fireworks();
+$('gbox').innerHTML='<div style="font-size:70px">💌</div><div class="script" style="font-size:32px;color:#d6204f">Will you be mine, forever?</div><button class="btn" id="fy" style="margin-top:12px">Yes, forever ❤️</button>';
+$('fy').onclick=e=>{burst(e.clientX,e.clientY,80);fireworks();$('fy').textContent='I love you! 💞'}};
 </script></body></html>
